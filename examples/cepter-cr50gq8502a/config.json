@@ -1,0 +1,12 @@
+{
+  "dock_apps": [
+    "com.google.android.youtube.tv",
+    "com.netflix.ninja",
+    "com.amazon.amazonvideo.livingroom",
+    "com.wbd.stream"
+  ],
+  "hidden_apps": ["com.realtek.tv"],
+  "live_tv_package": "com.realtek.tv",
+  "stock_home_redirect": "com.google.android.apps.tv.launcherx",
+  "columns": 4
+}

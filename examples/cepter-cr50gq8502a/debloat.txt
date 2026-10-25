@@ -1,0 +1,50 @@
+# Cepter 50" 4K QLED Google TV CR50GQ8502A (device R10G, product CEPTER_FFM, made by MOKA), Finland
+# Google TV on Android 14, firmware UKR1.251010.001, Realtek RT2875P board, RTD6748 platform.
+# Same hardware and firmware family as examples/prismplus-q65-ultra-r10g/ and examples/kalley-r10g/.
+#
+# Apply:   TV_HOST=<tv ip> tools/disable.sh examples/cepter-cr50gq8502a/debloat.txt
+# Undo:    TV_HOST=<tv ip> tools/restore.sh examples/cepter-cr50gq8502a/debloat.txt com.google.android.apps.tv.launcherx
+# Everything is DISABLED, not uninstalled. Comment out any line you want to keep.
+#
+# Stock launcher: com.google.android.apps.tv.launcherx. KEEP IT ENABLED, and keep setupwraith enabled.
+# Like the Acer R4G (docs/devices/acer-r4g.md), this firmware's Settings re-enables a fixed list of
+# packages at every cold boot, setupwraith among them. With launcherx disabled as on the Kalley R10G,
+# the first cold boot landed on setupwraith's .RecoveryActivity and Home was gone until launcherx was
+# re-enabled. The reference launcher takes Home instead with HomeKeyService (HOME_KEY_SERVICE=1) and
+# stock_home_redirect = com.google.android.apps.tv.launcherx (config.json in this folder). Install it with
+# STOCK_LAUNCHER=none launcher/build-and-install.sh; its Home check then reports launcherx, which is
+# expected here, so enable HomeKeyService afterwards the way the script does.
+# With that, a cold boot opened the reference launcher directly, and on the real remote Home, Input,
+# the mic (Assistant), the Netflix, YouTube and Prime Video buttons and Settings all worked; holding
+# volume up kept ramping.
+#
+# Came back enabled at the first cold boot, so left out of this list: com.google.android.partnersetup,
+# com.apps.tvmanager, com.apps.biz.ds (digital signage), com.apps.biz.mt and com.mk.tv.meeting.service
+# (meeting mode), com.google.android.play.games, com.mk.tv.gallery, com.google.android.tungsten.setupwraith.
+# Shipped disabled: com.apps.mk.gameui, com.usc.scmanager.moka, com.viso.mdm.
+#
+# Network: the saved Wi-Fi belongs to android.uid.system, not setupwraith; this set ran on its built-in Ethernet.
+# Live TV and inputs: keep com.realtek.dtv, com.realtek.tv.atv and com.realtek.tv.passthrough (HDMI, AV).
+# The unused DTMB/ISDB/ATSC tuners (com.realtek.dtmb, com.realtek.tv.isdb, com.realtek.tv.atsc) are
+# TvInputServices; they were left enabled here (the PRISM+ list disables them).
+# OTA: keep com.apps.ota, com.apps.authota and com.realsil.ota (it updates the remote).
+#
+# Tested on one set on 2026-10-23, two cold boots. Fresh, not yet lived with for days; update it if
+# something breaks. Kept by choice: every streaming app, Assistant, Chromecast, Scast/FastCast mirroring, AirPlay.
+
+# Partner customization and auto-installs
+com.realtek.leanbacklauncher.partnercustomizer
+android.autoinstalls.config.google.gtvpai   # Play partner auto-installs
+
+# Preloaded services
+com.seraphic.media.tv.interactive.app       # HbbTV interactive layer
+com.apps.wifihotspot
+com.android.printspooler
+
+# Karaoke and sound preloads
+com.realtek.kara
+com.realtek.karaoke.userguide
+com.apps.puresound
+
+# Preloaded apps, off by choice
+com.apps.usbmediaplayer                     # USB photo/video player
